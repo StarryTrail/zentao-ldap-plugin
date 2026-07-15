@@ -1,4 +1,4 @@
-  禅道 22.3 LDAP 插件
+  禅道开源版LDAP插件 适用于 22.3 版本
 
   基于 Nuyoah (https://github.com/Nuyoah66/zentao_ldap) 二次开发，适配禅道开源版 22.3。
   php7.4
