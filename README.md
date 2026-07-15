@@ -115,6 +115,4 @@
 
 ## 📄 License
 
-Licensed under the Apache License 2.0.
-
-http://www.apache.org/licenses/LICENSE-2.0
+Licensed under the GNU GENERAL PUBLIC LICENSE。
