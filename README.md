@@ -1,4 +1,4 @@
-# 禅道开源版 LDAP 插件（适用于 ZenTao Open Source 22.3）
+# 禅道开源版 LDAP 插件（适用于禅道开源版 22.3）
 
 基于 [Nuyoah/zentao_ldap](https://github.com/Nuyoah66/zentao_ldap) 二次开发，适配 禅道开源版 22.3。
 
