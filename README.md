@@ -1,50 +1,120 @@
-  禅道开源版LDAP插件 适用于 22.3 版本
+# 禅道开源版 LDAP 插件（适用于 ZenTao Open Source 22.3）
 
-  基于 Nuyoah (https://github.com/Nuyoah66/zentao_ldap) 二次开发，适配禅道开源版 22.3。
-  php7.4
+基于 [Nuyoah/zentao_ldap](https://github.com/Nuyoah66/zentao_ldap) 二次开发，适配 **禅道开源版 22.3**。
 
-  功能
+> **运行环境**
+>
+> - ZenTao Open Source **22.3**
+> - PHP **7.4**
 
-  - 从 LDAP/AD 服务器同步用户信息（账号、真实姓名、邮箱）
-  - 使用 LDAP 凭据登录禅道
-  - 本地用户通过 $ 前缀登录（如 $admin）
-  - 禁止 LDAP 用户修改/重置密码
-  - 支持嵌套 OU 用户搜索
-  - 属性名大小写不敏感匹配
+---
 
-  安装
+## ✨ 功能特性
 
-  1. 下载 zentao-ldap-plugin.zip
-  2. 管理员登录禅道 → 插件管理 → 获得插件 → 本地安装
-  3. 选择 zip 文件，按提示完成
+- 支持 LDAP / Active Directory（AD）认证登录
+- 从 LDAP/AD 同步用户信息
+  - 账号（Account）
+  - 真实姓名（Real Name）
+  - 邮箱（Email）
+- 使用 LDAP 凭据登录禅道
+- 支持本地管理员账号登录（账号前添加 `$`，如 `$admin`）
+- 禁止 LDAP 用户修改或重置密码
+- 支持嵌套 OU 用户搜索
+- LDAP 属性名大小写不敏感匹配
 
-  配置
+---
 
-  安装后左侧导航栏出现「LDAP」菜单，填写配置后：
+## 📦 安装
 
-  保存设置 → 测试连接 → 同步LDAP/AD用户
+1. 下载 `zentao-ldap-plugin.zip`
+2. 使用管理员账号登录禅道
+3. 进入：
 
-  - LDAP服务器：ldap://ldap.example.com:389
-  - BindDN：cn=admin,dc=example,dc=com
-  - BaseDN：ou=people,dc=example,dc=com
-  - 查询条件：(objectclass=person)
-  - 用户名字段：uid 或 sAMAccountName
-  - 真实姓名字段：displayName 或 cn
-  - 邮箱字段：mail
+   ```
+   后台 → 插件管理 → 获得插件 → 本地安装
+   ```
 
-  登录方式
+4. 选择插件 ZIP 文件并完成安装
 
-  - LDAP 用户：直接输入账号密码
-  - 本地用户：账号前加 $，如 $admin
+---
 
-  适配说明（相比原 18.13 版本）
+## ⚙️ 配置
 
-  - identify() 增加 $passwordStrength 参数
-  - updatePassword() / resetPassword() / update() 参数改为对象
-  - 配置保存路径用 __DIR__ 替代 getModuleRoot()
-  - POST 数据用 $_POST 替代 $this->post
-  - 页面渲染通过 oldPages 配置适配
+安装完成后，左侧导航栏会新增 **LDAP** 菜单。
 
-  许可证
+配置完成后依次执行：
 
-  Licensed under the Apache License, Version 2.0 (http://www.apache.org/licenses/LICENSE-2.0)
+1. 保存设置
+2. 测试连接
+3. 同步 LDAP/AD 用户
+
+### 示例配置
+
+| 配置项 | 示例 |
+| ------- | ---- |
+| LDAP Server | `ldap://ldap.example.com:389` |
+| Bind DN | `cn=admin,dc=example,dc=com` |
+| Base DN | `ou=people,dc=example,dc=com` |
+| Search Filter | `(objectclass=person)` |
+| Username Attribute | `uid` 或 `sAMAccountName` |
+| Real Name Attribute | `displayName` 或 `cn` |
+| Email Attribute | `mail` |
+
+---
+
+## 🔐 登录方式
+
+### LDAP 用户
+
+直接使用 LDAP 用户名和密码登录。
+
+例如：
+
+```text
+用户名：admin
+密码：******
+```
+
+---
+
+### 本地用户
+
+为了区分 LDAP 用户，本地账号需要在用户名前加 `$`。
+
+例如：
+
+```text
+用户名：$admin
+密码：******
+```
+
+---
+
+## 🔄 相比原版（18.13）修改内容
+
+为适配 **ZenTao Open Source 22.3**，进行了以下兼容性调整：
+
+- `identify()` 增加 `$passwordStrength` 参数
+- `updatePassword()`、`resetPassword()`、`update()` 参数改为对象
+- 配置保存路径使用 `__DIR__` 替代 `getModuleRoot()`
+- POST 数据获取改为 `$_POST`，替代 `$this->post`
+- 页面渲染通过 `oldPages` 配置兼容新版框架
+
+---
+
+## 🙏 致谢
+
+本项目基于以下开源项目进行二次开发：
+
+- **Nuyoah**  
+  https://github.com/Nuyoah66/zentao_ldap
+
+感谢原作者的开源贡献。
+
+---
+
+## 📄 License
+
+Licensed under the Apache License 2.0.
+
+http://www.apache.org/licenses/LICENSE-2.0
