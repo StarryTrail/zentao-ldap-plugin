@@ -1,7 +1,0 @@
-{
-  "permissions": {
-    "allow": [
-      "Read(//Users/devops/Downloads/zentaopms/module/user/**)"
-    ]
-  }
-}
