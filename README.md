@@ -11,8 +11,8 @@
 
 ## ✨ 功能特性
 
-- 支持 LDAP / Active Directory（AD）认证登录
-- 从 LDAP/AD 同步用户信息
+- 支持 LDAP 认证登录
+- 从 LDAP 同步用户信息
   - 账号（Account）
   - 真实姓名（Real Name）
   - 邮箱（Email）
