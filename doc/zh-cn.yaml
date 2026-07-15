@@ -21,7 +21,7 @@ releases:
   2.0:
     zentaoversion: 22.3
     charge: Free
-    license: Apache-2.0
+    license: LGPL
     changelog: >
       1. 适配禅道 22.3 版本的方法签名变更（identify、updatePassword、resetPassword、update）
       2. 修复与禅道 22.3 密码强度参数的兼容性问题
@@ -29,14 +29,14 @@ releases:
   1.1:
     zentaoversion: 18.13
     charge: Free
-    license: Apache-2.0
+    license: LGPL
     changelog: >
       1. 修复LDAP用户邮箱为空时，同步用户导致同步失败的问题
     date: 2025-04-26
   1.0:
     zentaoversion: 18.13
     charge: Free
-    license: Apache-2.0
+    license: LGPL
     changelog: >
       1. 支持18.13版本
       2. 支持从LDAP服务器上同步用户信息（账号、真实姓名、邮箱）

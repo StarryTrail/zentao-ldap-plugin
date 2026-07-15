@@ -21,7 +21,7 @@ releases:
   2.0:
     zentaoversion: 22.3
     charge: free
-    license: Apache-2.0
+    license: LGPL
     changelog: >
       1. Adapted to ZenTao 22.3 method signatures (identify, updatePassword, resetPassword, update).
       2. Fixed compatibility with ZenTao 22.3 password strength parameter.
@@ -29,14 +29,14 @@ releases:
   1.1:
     zentaoversion: 18.13
     charge: free
-    license: Apache-2.0
+    license: LGPL
     changelog: >
       1. Fixed the issue where synchronization fails when the email of an LDAP user is empty.
     date: 2025-04-26
   1.0:
     zentaoversion: 18.13
     charge: free
-    license: Apache-2.0
+    license: LGPL
     changelog: >
       1. Supports version 18.13.
       2. Supports synchronizing user information (account, real name, email) from an LDAP server.
