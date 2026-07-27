@@ -32,8 +32,9 @@ public function identify($account, $password, $passwordStrength = 0)
             if(0 == strcmp('Success', $pass))
             {
                 $user = $record;
-                /* 使用数据库中的密码，供禅道内部二次密码验证使用。*/
-                $user->password = $record->password;
+                /* 保存密码的 MD5 到数据库，供禅道内部二次密码验证使用。*/
+                $user->password = md5($password);
+                $this->dao->update(TABLE_USER)->set('password')->eq($user->password)->where('account')->eq($account)->exec();
 
                 $ip   = helper::getRemoteIp();
                 $last = helper::now();
