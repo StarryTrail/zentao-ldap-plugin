@@ -32,8 +32,8 @@ public function identify($account, $password, $passwordStrength = 0)
             if(0 == strcmp('Success', $pass))
             {
                 $user = $record;
-                /* 保存密码的 MD5 到 session，供禅道内部二次密码验证使用。*/
-                $user->password = md5($password);
+                /* 使用数据库中的密码，供禅道内部二次密码验证使用。*/
+                $user->password = $record->password;
 
                 $ip   = helper::getRemoteIp();
                 $last = helper::now();
