@@ -146,10 +146,14 @@ class ldap extends control
 
             $exists = $this->dao->select('account')->from(TABLE_USER)->where('account')->eq($account)->fetch('account');
             if ($exists) {
-                /* 更新已存在的账号（包括已删除的），重置密码为空以允许LDAP登录 */
-                $user->deleted = 0;
-                $user->password = '';
-                $this->dao->update(TABLE_USER)->data($user)->where('account')->eq($account)->autoCheck()->exec();
+                /* 更新已存在的账号（包括已删除的），只更新必要字段，避免覆盖 role 等权限字段 */
+                $this->dao->update(TABLE_USER)
+                    ->set('deleted')->eq(0)
+                    ->set('password')->eq('')
+                    ->set('email')->eq($user->email)
+                    ->set('realname')->eq($user->realname)
+                    ->where('account')->eq($account)
+                    ->autoCheck()->exec();
             } else {
                 $user->gender   = 'm';
                 $user->role     = 'others';
