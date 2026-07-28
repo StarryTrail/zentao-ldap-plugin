@@ -9,19 +9,32 @@ public function identify($account, $password, $passwordStrength = 0)
 {
     if(!$account || !$password) return false;
 
-    /* 获取用户信息，确认账号在本地数据库中存在且未被删除。*/
-    $record = $this->dao->select('*')->from(TABLE_USER)
-        ->where('account')->eq($account)
-        ->andWhere('deleted')->eq(0)
-        ->fetch();
-
     /* $ 前缀用户：去掉前缀后走禅道原生密码验证。*/
     if(0 == strcmp('$', substr($account, 0, 1)))
     {
         return parent::identify(ltrim($account, '$'), $password, $passwordStrength);
     }
 
-    /* LDAP 用户验证。*/
+    /*
+     * 禅道内部二次验证（cookie 续期 / session rand 校验）传入的是 hash 而非明文密码：
+     *   - 长度 40：cookie 续期，sha1(account + password + last)
+     *   - 长度 32：session rand 二次验证，md5(password + session->rand)
+     * 此时数据库中已存有 LDAP 登录成功后写入的 md5(明文密码)（见下方 LDAP 验证成功分支），
+     * 交给禅道原生 identifyUser() 用数据库密码比对即可，绝不能拿 hash 去 LDAP bind。
+     */
+    $passwordLength = strlen($password);
+    if($passwordLength == 32 || $passwordLength == 40)
+    {
+        return parent::identify($account, $password, $passwordStrength);
+    }
+
+    /* 获取用户信息，确认账号在本地数据库中存在且未被删除。*/
+    $record = $this->dao->select('*')->from(TABLE_USER)
+        ->where('account')->eq($account)
+        ->andWhere('deleted')->eq(0)
+        ->fetch();
+
+    /* LDAP 用户验证（明文密码）。*/
     if($record)
     {
         $ldap = $this->loadModel('ldap');
